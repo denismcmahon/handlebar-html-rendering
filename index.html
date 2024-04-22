@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+</head>
+<body>
+    <div id="htmlContent"></div>
+    <button onclick="getHTMLContent()">Get HTML Content</button>
+
+    <script>
+        // Function to make a GET request to the backend route
+        function getHTMLContent() {
+            fetch('http://localhost:3000/').then(response => {
+                // Check if the response is successful (status code 200)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse response as text
+                return response.text();
+            }).then(htmlContent => {
+                // Set the HTML content in the div
+                document.getElementById('htmlContent').innerHTML = htmlContent;
+            }).catch(error => {
+                console.error('Error fetching HTML content:', error);
+                // Display error message
+                document.getElementById('htmlContent').innerHTML = '<p>Error fetching HTML content.</p>';
+            });
+        }
+    </script>
+</body>
+</html>
